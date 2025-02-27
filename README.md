@@ -60,7 +60,7 @@ yarn build && start:prod
 
 #### Create a user
 
-```json
+```js
 // POST /api/v1/user body example
 {
   "name": "Some user name",
@@ -92,7 +92,7 @@ To filters the users you can use the following query params:
 > [!IMPORTANT]
 > The taks endpoints are host on `/api/v1/task`
 
-```json
+```js
 // POST /api/v1/task body example
 {
   "title": "Task title",
@@ -134,7 +134,7 @@ endpoint `/api/v1/task/metrics/completion-rate`
 
 ##### Example of the response with faked data
 
-```json
+```js
 // An item of the array
 {
   "userName": "Dr. Alejandro Balistreri",
@@ -153,7 +153,7 @@ endpoint `/api/v1/task/metrics/costs`
 
 ##### Example of the response with faked data
 
-```json
+```js
 // An item of the array
 {
     "userName": "Dr. Alejandro Balistreri",
