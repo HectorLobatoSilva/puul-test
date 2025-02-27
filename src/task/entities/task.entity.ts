@@ -5,7 +5,7 @@ import {
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { User } from '@user/entities/user.entity';
+import { User } from './../../user/entities/user.entity';
 
 @Entity()
 export class Task {
@@ -30,7 +30,6 @@ export class Task {
   @Column({ type: 'int' })
   costPerTask: number;
 
-  @ManyToMany(() => User)
-  @JoinTable()
-  asignedUsers: number[];
+  @ManyToMany(() => User, (user) => user.tasks)
+  asignedUsers: User[];
 }

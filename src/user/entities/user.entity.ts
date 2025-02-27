@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
+import { Task } from '../../task/entities/task.entity';
 
 @Entity()
 export class User {
@@ -14,6 +21,10 @@ export class User {
   @Column({ type: 'enum', enum: ['admin', 'member'] })
   role: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', select: false })
   password: string;
+
+  @ManyToMany(() => Task, (task) => task.asignedUsers)
+  @JoinTable()
+  tasks: Task[];
 }

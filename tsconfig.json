@@ -17,9 +17,5 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
-    "paths": {
-      "@user/*": ["src/user/*"],
-      "@task/*": ["src/task/*"]
-    }
   }
 }
