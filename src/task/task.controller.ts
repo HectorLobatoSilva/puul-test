@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { TaskService } from './task.service';
 import { CreateTaskDto } from './dto/create-task.dto';
@@ -21,8 +22,22 @@ export class TaskController {
   }
 
   @Get()
-  findAll() {
-    return this.taskService.findAll();
+  findAll(
+    @Query('filterByDeadline') filterByDeadline?: string,
+    @Query('filterByTitle') filterByTitle?: string,
+    @Query('filterByUserId') filterByUserId?: string,
+    @Query('filterByUserName') filterByUserName?: string,
+    @Query('filterByUserEmail') filterByUserEmail?: string,
+  ) {
+    return this.taskService.findAll({
+      filterByDeadline: filterByDeadline
+        ? new Date(filterByDeadline)
+        : undefined,
+      filterByTitle,
+      filterByUserId: filterByUserId ? Number(filterByUserId) : undefined,
+      filterByUserName,
+      filterByUserEmail,
+    });
   }
 
   @Get(':id')
@@ -38,5 +53,15 @@ export class TaskController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.taskService.remove(Number(id));
+  }
+
+  @Get('metrics/completion-rate')
+  getTaskCompletionRateByUser() {
+    return this.taskService.getTaskCompletionRateByUser();
+  }
+
+  @Get('metrics/costs')
+  getTaskEfficiencyMetrics() {
+    return this.taskService.getCostEffiencyMetrics();
   }
 }
